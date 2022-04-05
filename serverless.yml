@@ -1,28 +1,35 @@
-service:
-  name: serverless-typescript-aws
+service: serverless-typescript-aws
+frameworkVersion: '3'
 
 custom:
-  webpack:
-    webpackConfig: ./webpack.config.js
-    includeModules: true
+    webpack:
+        webpackConfig: ./webpack.config.js
+        includeModules: true
+    serverless-offline:
+        port: 3000
 
 # Add the serverless-webpack plugin
 plugins:
-  - serverless-webpack
+    - serverless-webpack
+    - serverless-esbuild
+    - serverless-offline
 
 provider:
-  name: aws
-  runtime: nodejs12.x
-  profile: serverless-deploy
-  apiGateway:
-    minimumCompressionSize: 1024 # Enable gzip compression for responses > 1 KB
-  environment:
-    AWS_NODEJS_CONNECTION_REUSE_ENABLED: 1 # reuse HTTP connections : https://docs.aws.amazon.com/sdk-for-javascript/v2/developer-guide/node-reusing-connections.html
+    name: aws
+    runtime: nodejs12.x
+    region: ap-south-1
+    profile: serverless-deploy
+    apiGateway:
+        minimumCompressionSize: 1024 # Enable gzip compression for responses > 1 KB
+        shouldStartNameWithService: true
+    environment: ${file(env.yml):${opt:stage}}
 
 functions:
-  hello:
-    handler: handler.hello
-    events:
-      - http:
-          method: get
-          path: hello
+    hello:
+        handler: handler.hello
+        description: Example hello world endpoint
+        events:
+            - http:
+                  method: get
+                  path: hello
+                  cors: true

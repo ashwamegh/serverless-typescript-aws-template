@@ -2,6 +2,11 @@
 node_modules
 jspm_packages
 
+# Logs
+logs
+*.log
+npm-debug.log*
+
 # Serverless directories
 .serverless
 
@@ -12,4 +17,11 @@ serverless.custom.yml
 
 .eslintcache
 
+.esbuild
+
 .aws
+
+# Env variables
+env.yml
+.env
+.env.*
