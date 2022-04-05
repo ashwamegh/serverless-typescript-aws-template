@@ -6,17 +6,17 @@ You need to have an AWS account, to create a dedicated IAM User with credentials
 
 ## Stack
 
-- [Node.js](https://nodejs.org/en/) 12x
-- [Serverless](https://serverless.com/framework/docs/)
-- [Typescript](https://www.typescriptlang.org/) (> 3.8) for type checking.
-- A sample [docker-compose.yml](https://docs.docker.com/compose/), which allow us to test our App with [Docker](https://www.docker.com/).
+-   [Node.js](https://nodejs.org/en/) 12x
+-   [Serverless](https://serverless.com/framework/docs/)
+-   [Typescript](https://www.typescriptlang.org/) (> 3.8) for type checking.
+-   A sample [docker-compose.yml](https://docs.docker.com/compose/), which allow us to test our App with [Docker](https://www.docker.com/).
 
 ## IDE Setup
 
 [VSCode](https://code.visualstudio.com/) is highly preferred. Please ensure you have installed these extensions:
 
-- Prettier
-- Eslint
+-   Prettier
+-   Eslint
 
 ---
 
@@ -26,7 +26,7 @@ You can clone this repo and use it with docker, or jump to the next section and 
 
 ```bash
 # host project dir
-cd serverless-typescript-aws
+cd serverless-typescript-aws-template
 
 # Up container
 docker-compose up -d
@@ -35,7 +35,7 @@ docker-compose up -d
 docker exec -ti node sh
 
 # container project dir
-cd /var/www/serverless-typescript-aws
+cd /var/www/serverless-typescript-aws-template
 
 # install dependencies
 npm install
@@ -45,13 +45,13 @@ npm install
 
 ### Requirements
 
-- Node.js
+-   Node.js
 
 Use our node container (set up in `docker-compose.yml`)
 
-Or install Node 12 : [https://nodejs.org/en/](https://nodejs.org/en/)
+Or install Node 16 : [https://nodejs.org/en/](https://nodejs.org/en/)
 
-- Serverless
+-   Serverless
 
 ```bash
 npm install -g serverless
@@ -75,41 +75,41 @@ Now we have initial handler.ts, serverless.yml, tsconfig.json and webpack.config
 npm install --save-dev eslint @typescript-eslint/parser @typescript-eslint/eslint-plugin
 ```
 
-- Create `.eslintrc.js`
+-   Create `.eslintrc.js`
 
 ```js
 module.exports = {
-  extends: [
-    'eslint:recommended',
-    'plugin:@typescript-eslint/eslint-recommended',
-    'plugin:@typescript-eslint/recommended',
-  ],
-  env: {
-    node: true,
-  },
-  parser: '@typescript-eslint/parser',
-  plugins: ['@typescript-eslint'],
-  settings: {
-    'import/parsers': {
-      '@typescript-eslint/parser': ['.ts', '.tsx'],
-    },
-    'import/resolver': {
-      typescript: {},
-    },
-  },
-  parserOptions: {
-    project: './tsconfig.json',
-    tsconfigRootDir: './',
-    sourceType: 'module',
-    ecmaVersion: 2019,
-  },
-  rules: {
-    '@typescript-eslint/no-explicit-any': 'off',
-  },
+	extends: [
+		'eslint:recommended',
+		'plugin:@typescript-eslint/eslint-recommended',
+		'plugin:@typescript-eslint/recommended',
+	],
+	env: {
+		node: true,
+	},
+	parser: '@typescript-eslint/parser',
+	plugins: ['@typescript-eslint'],
+	settings: {
+		'import/parsers': {
+			'@typescript-eslint/parser': ['.ts', '.tsx'],
+		},
+		'import/resolver': {
+			typescript: {},
+		},
+	},
+	parserOptions: {
+		project: './tsconfig.json',
+		tsconfigRootDir: './',
+		sourceType: 'module',
+		ecmaVersion: 2019,
+	},
+	rules: {
+		'@typescript-eslint/no-explicit-any': 'off',
+	},
 };
 ```
 
-- Create `.eslintignore` :
+-   Create `.eslintignore` :
 
 ```text
 node_modules
@@ -128,17 +128,17 @@ node_modules
 npm install --save-dev prettier eslint-config-prettier eslint-plugin-prettier
 ```
 
-- Create `.prettierrc.js`
+-   Create `.prettierrc.js`
 
 ```js
 module.exports = {
-  printWidth: 120,
-  singleQuote: true,
-  trailingComma: 'all',
+	printWidth: 120,
+	singleQuote: true,
+	trailingComma: 'all',
 };
 ```
 
-- Create `.prettierignore`
+-   Create `.prettierignore`
 
 ```text
 node_modules
@@ -146,7 +146,7 @@ node_modules
 .webpack
 ```
 
-- Update `.eslintrc.js` rules
+-   Update `.eslintrc.js` rules
 
 ```js
 extends: [
@@ -180,23 +180,23 @@ import { APIGatewayProxyHandler, APIGatewayEvent, Context, Callback } from 'aws-
 import 'source-map-support/register';
 
 export const hello: APIGatewayProxyHandler = async (
-  event: APIGatewayEvent,
-  context: Context,
-  callback: Callback,
+	event: APIGatewayEvent,
+	context: Context,
+	callback: Callback,
 ): Promise<any> => {
-  return {
-    statusCode: 200,
-    body: JSON.stringify(
-      {
-        message: 'Go Serverless Webpack (Typescript) v1.0! Your function executed successfully!',
-        input: event,
-        context: context,
-        callback: callback,
-      },
-      null,
-      2,
-    ),
-  };
+	return {
+		statusCode: 200,
+		body: JSON.stringify(
+			{
+				message: 'Go Serverless Webpack (Typescript) v1.0! Your function executed successfully!',
+				input: event,
+				context: context,
+				callback: callback,
+			},
+			null,
+			2,
+		),
+	};
 };
 ```
 
@@ -234,10 +234,10 @@ Here is a better way : [Configure AWS Credentials (Better way)](#configure-aws-c
 
 ### Create IAM user for Serverless
 
-- Login to AWS and navigate to IAM
-- Create a new user called serverless-deploy
-- Give serverless-deploy Programatic access
-- Attach the AdministratorAccess policy
+-   Login to AWS and navigate to IAM
+-   Create a new user called serverless-deploy
+-   Give serverless-deploy Programatic access
+-   Attach the AdministratorAccess policy
 
 ### Use your user credentials
 
@@ -254,7 +254,7 @@ Set this profile in your `serverless.yml` so Serverless can use it for deploymen
 
 ```yaml
 provider:
-  profile: serverless-deploy
+    profile: serverless-deploy
 ```
 
 (or pass it with `--profile` argument to `serverless deploy`command.)
@@ -263,33 +263,33 @@ Here is our final `serverless.yml` :
 
 ```yaml
 service:
-  name: serverless-typescript-aws
+    name: serverless-typescript-aws
 
 custom:
-  webpack:
-    webpackConfig: ./webpack.config.js
-    includeModules: true
+    webpack:
+        webpackConfig: ./webpack.config.js
+        includeModules: true
 
 # Add the serverless-webpack plugin
 plugins:
-  - serverless-webpack
+    - serverless-webpack
 
 provider:
-  name: aws
-  runtime: nodejs12.x
-  profile: serverless-deploy
-  apiGateway:
-    minimumCompressionSize: 1024 # Enable gzip compression for responses > 1 KB
-  environment:
-    AWS_NODEJS_CONNECTION_REUSE_ENABLED: 1 # reuse HTTP connections : https://docs.aws.amazon.com/sdk-for-javascript/v2/developer-guide/node-reusing-connections.html
+    name: aws
+    runtime: nodejs12.x
+    profile: serverless-deploy
+    apiGateway:
+        minimumCompressionSize: 1024 # Enable gzip compression for responses > 1 KB
+    environment:
+        AWS_NODEJS_CONNECTION_REUSE_ENABLED: 1 # reuse HTTP connections : https://docs.aws.amazon.com/sdk-for-javascript/v2/developer-guide/node-reusing-connections.html
 
 functions:
-  hello:
-    handler: handler.hello
-    events:
-      - http:
-          method: get
-          path: hello
+    hello:
+        handler: handler.hello
+        events:
+            - http:
+                  method: get
+                  path: hello
 ```
 
 ## Deploy
@@ -303,15 +303,15 @@ Dev stage is assumed by default.
 
 What do Serverless do ?
 
-- Package our application (with Webpack)
-- Creates a CloudFormation stack
-- Create a S3 Bucket
-- Upload the CloudFormation template to S3
-- Upload our application package to S3
-- Provisions the IAM Roles
-- Provisions the Log Groups
-- Provisions the ApiGateway end points
-- Provisions the Lambda function our service
+-   Package our application (with Webpack)
+-   Creates a CloudFormation stack
+-   Create a S3 Bucket
+-   Upload the CloudFormation template to S3
+-   Upload our application package to S3
+-   Provisions the IAM Roles
+-   Provisions the Log Groups
+-   Provisions the ApiGateway end points
+-   Provisions the Lambda function our service
 
 You can now invoke your service :
 
@@ -358,11 +358,11 @@ Let's go back to AWS Console, and create a new IAM Group `serverless-deploy-grou
 
 Let's now create a new IAM Policy :
 
-- Create a new IAM Policy
-- Add a policy for the CloudFormation service, allow _List:DescribeStacks_ action.
-- Indicate to apply this permission to all resources and click _Review Policy_ button.  
-  _(If necessary, you can specify specific ressources to apply the permissions)_
-- Name this policy `serverless-deploy-policy` (just for consistency) and finish to create it.
+-   Create a new IAM Policy
+-   Add a policy for the CloudFormation service, allow _List:DescribeStacks_ action.
+-   Indicate to apply this permission to all resources and click _Review Policy_ button.  
+    _(If necessary, you can specify specific ressources to apply the permissions)_
+-   Name this policy `serverless-deploy-policy` (just for consistency) and finish to create it.
 
 Now go back to the group `serverless-deploy-group` we created and attach it this policy.  
 Then go back to the user `serverless-deploy` and attach it to the group `serverless-deploy-group`.

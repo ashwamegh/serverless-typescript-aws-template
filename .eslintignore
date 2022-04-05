@@ -1,6 +1,7 @@
 node_modules
 .serverless
 .vscode
+.esbuild
 *.config.js
 .webpack
 **/*.js

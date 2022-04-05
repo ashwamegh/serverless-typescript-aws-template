@@ -2,9 +2,9 @@ version: '3'
 services:
     node:
         container_name: node
-        image: node:12-alpine
+        image: node:16-alpine
         volumes:
-            - .:/var/www/serverless-typescript-aws
+            - .:/var/www/serverless-typescript-aws-template
         ports:
             - 3000:3000
         tty: true

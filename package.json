@@ -21,6 +21,9 @@
 		"prod": "SLS_DEBUG=* sls offline start --stage prod",
 		"deploy": "sls deploy --stage prod"
 	},
+	"engines": {
+		"node": ">=14.15.0"
+	},
 	"dependencies": {
 		"@middy/core": "^2.5.7",
 		"@middy/http-json-body-parser": "^2.5.7",
