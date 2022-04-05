@@ -17,6 +17,7 @@
 		"typecheck": "tsc --noEmit",
 		"test": "echo \"Error: no test specified\" && exit 1",
 		"dev": "SLS_DEBUG=* sls offline start --stage dev",
+		"debug": "export SLS_DEBUG=* && node --inspect ./node_modules/.bin/serverless offline -s dev",
 		"prod": "SLS_DEBUG=* sls offline start --stage prod",
 		"deploy": "sls deploy --stage prod"
 	},
